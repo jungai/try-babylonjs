@@ -17,7 +17,11 @@ export type BabylonjsProps = {
   adaptToDeviceRatio?: boolean;
   renderChildrenWhenReady?: boolean;
   sceneOptions?: SceneOptions;
-  onSceneReady: (scene: Scene) => void;
+  onSceneReady: (
+    scene: Scene,
+    engine: Engine,
+    canvas: HTMLCanvasElement,
+  ) => void;
   /**
    * Automatically trigger engine resize when the canvas resizes (default: true)
    */
@@ -219,10 +223,10 @@ export default (
 
       const sceneIsReady = scene.isReady();
       if (sceneIsReady) {
-        props.onSceneReady(scene);
+        props.onSceneReady(scene, engine, reactCanvas.current!);
       } else {
         scene.onReadyObservable.addOnce((scene) => {
-          props.onSceneReady(scene);
+          props.onSceneReady(scene, engine, reactCanvas.current!);
           setSceneContext(() => ({
             canvas: reactCanvas.current,
             scene,
