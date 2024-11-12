@@ -32,11 +32,7 @@ const isTextureAsset = (name: string): boolean => {
   );
 };
 
-type ViewModelScene = {
-  className?: string;
-};
-
-export const ViewModelScene = ({ className }: ViewModelScene) => {
+export const ViewModelScene = () => {
   const canvasRef = useRef<ElementRef<"canvas"> | null>(null);
   const [engine, setEngine] = useState<Engine>();
   const [scene, setScene] = useState<Scene>();
